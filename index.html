@@ -3,46 +3,76 @@
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
         <title></title>
-        <script
-            src="//zhanghuihuihuil.github.io/CPP_Editor_Of_JS/jquery-3.6.1.min.js"
-            type="text/javascript"
-            charset="utf-8"
-        ></script>
         <style type="text/css" media="all">
-        	#cppEditor{
-        		display:none;
-        	}
+            #output {
+                width: 100%;
+                height: 600px;
+            }
+            textarea {
+                width: 100%;
+            }
         </style>
     </head>
     <body>
-        <iframe
-            name="bbb"
-            width="900px"
-            height="600px"
-            id="cppEditor"
-            src="https://c.runoob.com/compile/12/"
-            frameborder="10"
-       
-        ></iframe>
-        <div>
-            <label>显示工具<input type="checkbox" id="toggle" /></label>
+        <div class="editor">
+            <iframe id="output" frameborder="1"></iframe>
+            <textarea id="html_code" rows="4" cols="47">
+&lt;!-- 这里写HTML代码 --&gt;</textarea
+            >
+            <br />
+            <input type="button" id="a1" value="<" />
+            <input type="button" id="a2" value=">" />
+            <br /><br />
+            <textarea id="css_code" rows="4" cols="47">
+/* 这里写css代码 */</textarea
+            >
+
+            <textarea id="js_code" rows="4" cols="47">// 这里写js代码</textarea>
+            <button id="btn" type="button">清除代码</button>
         </div>
         <script type="text/javascript" charset="utf-8">
-            let editor = document.getElementById("cppEditor");
-            let toggle = false;
-            let Switch = document.getElementById("toggle");
-            
-            Switch.addEventListener("click", () => {
-                toggle = !toggle;
-                if (toggle) {
-                  
-                    editor.style.display = "block";
-                } else {
-                    
-                    editor.style.display = "none";
+            function run() {
+                let html_code = document.getElementById("html_code").value;
+                let css_code =
+                    "<style>" +
+                    document.getElementById("css_code").value +
+                    "</style>";
+                let js_code = document.getElementById("js_code").value;
+                let output = document.querySelector("#output");
+
+                //  console.log(html_code, js_code, css_code, output)
+                let bugCount = 0;
+                try{
+                	bugCount = 0;
+                output.contentDocument.body.innerHTML = html_code + css_code;
+                document.getElementById("js_code").style.color = "white";
+                output.contentWindow.eval(js_code);
+                }catch(bug){
+                	console.warn(bug);
+                	document.getElementById("js_code").style.color = "red"
+                	}
                 }
-               
-            });
+            
+            document.getElementById("html_code").addEventListener("keyup", run);
+
+            document.getElementById("css_code").addEventListener("keyup", run);
+
+            document.getElementById("js_code").addEventListener("keyup", run);
+            function clear(){
+            	document.getElementById("js_code").value = "// 这里写js代码";
+            	document.getElementById("css_code").value = "/* 这里写css代码 */";
+            	document.getElementById("html_code").value = "<!-- 这里写HTML代码 -->";
+            }
+            document.getElementById("btn").onclick = ()=>{
+            	clear()
+            	run()
+            }
+            document.querySelector("#a1").addEventListener("click",()=>{
+            	document.getElementById("html_code").value +="<";
+            })
+            document.querySelector("#a2").addEventListener("click",()=>{
+            	document.getElementById("html_code").value+=">";
+            })
         </script>
     </body>
 </html>

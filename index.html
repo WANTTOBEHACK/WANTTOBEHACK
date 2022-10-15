@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <title></title>
+        <script
+            src="//zhanghuihuihuil.github.io/CPP_Editor_Of_JS/jquery-3.6.1.min.js"
+            type="text/javascript"
+            charset="utf-8"
+        ></script>
+        <style type="text/css" media="all">
+        	#cppEditor{
+        		display:none;
+        	}
+        </style>
+    </head>
+    <body>
+        <iframe
+            name="bbb"
+            width="900px"
+            height="600px"
+            id="cppEditor"
+            src="https://c.runoob.com/compile/12/"
+            frameborder="10"
+       
+        ></iframe>
+        <div>
+            <label>显示工具<input type="checkbox" id="toggle" /></label>
+        </div>
+        <script type="text/javascript" charset="utf-8">
+            let editor = document.getElementById("cppEditor");
+            let toggle = false;
+            let Switch = document.getElementById("toggle");
+            
+            Switch.addEventListener("click", () => {
+                toggle = !toggle;
+                if (toggle) {
+                  
+                    editor.style.display = "block";
+                } else {
+                    
+                    editor.style.display = "none";
+                }
+               
+            });
+        </script>
+    </body>
+</html>

@@ -2,11 +2,13 @@
 <html>
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-        <title></title>
+        <title>简易html代码在线运行器</title>
         <style type="text/css" media="all">
             #output {
                 width: 100%;
                 height: 600px;
+                color: white;
+                background-color: black;
             }
             textarea {
                 width: 100%;
@@ -16,19 +18,36 @@
     <body>
         <div class="editor">
             <iframe id="output" frameborder="1"></iframe>
-            <textarea id="html_code" rows="4" cols="47">
-&lt;!-- 这里写HTML代码 --&gt;</textarea
-            >
+            <p>这里写HTML代码</p>
+            <textarea id="html_code" rows="4" cols="47"></textarea>
             <br />
-            <input type="button" id="a1" value="<" />
-            <input type="button" id="a2" value=">" />
-            <br /><br />
-            <textarea id="css_code" rows="4" cols="47">
-/* 这里写css代码 */</textarea
-            >
+            <input
+                onclick="clearcode('html_code')"
+                type="button"
+                id="a1"
+                value="清除html代码"
+            />
 
-            <textarea id="js_code" rows="4" cols="47">// 这里写js代码</textarea>
-            <button id="btn" type="button">清除代码</button>
+            <br /><br />
+            <p>这里写css代码</p>
+            <textarea id="css_code" rows="4" cols="47"></textarea>
+            <input
+                onclick="clearcode('css_code')"
+                type="button"
+                id="a1"
+                value="清除css代码"
+            />
+            <p>这里写js代码</p>
+
+            <textarea id="js_code" rows="4" cols="47"></textarea>
+            <input
+                onclick="clearcode('js_code')"
+                type="button"
+                id="a1"
+                value="清除js代码"
+            />
+            <br /><br />
+            <button id="btn" type="button">清除全部代码</button>
         </div>
         <script type="text/javascript" charset="utf-8">
             function run() {
@@ -42,37 +61,43 @@
 
                 //  console.log(html_code, js_code, css_code, output)
                 let bugCount = 0;
-                try{
-                	bugCount = 0;
-                output.contentDocument.body.innerHTML = html_code + css_code;
-                document.getElementById("js_code").style.color = "white";
-                output.contentWindow.eval(js_code);
-                }catch(bug){
-                	console.warn(bug);
-                	document.getElementById("js_code").style.color = "red"
-                	}
+                try {
+                    bugCount = 0;
+                    output.contentDocument.body.innerHTML =
+                        html_code + css_code;
+                    document.getElementById("js_code").style.color = "white";
+                    output.contentWindow.eval(js_code);
+                } catch (bug) {
+                    console.warn(bug);
+                    document.getElementById("js_code").style.color = "red";
                 }
-            
+            }
+
             document.getElementById("html_code").addEventListener("keyup", run);
 
             document.getElementById("css_code").addEventListener("keyup", run);
 
             document.getElementById("js_code").addEventListener("keyup", run);
-            function clear(){
-            	document.getElementById("js_code").value = "// 这里写js代码";
-            	document.getElementById("css_code").value = "/* 这里写css代码 */";
-            	document.getElementById("html_code").value = "<!-- 这里写HTML代码 -->";
+            function clear() {
+                document.getElementById("js_code").value = "";
+                document.getElementById("css_code").value = "";
+                document.getElementById("html_code").value = "";
             }
-            document.getElementById("btn").onclick = ()=>{
-            	clear()
-            	run()
-            }
+            document.getElementById("btn").onclick = () => {
+                clear();
+                run();
+            };
+            /*
             document.querySelector("#a1").addEventListener("click",()=>{
             	document.getElementById("html_code").value +="<";
             })
             document.querySelector("#a2").addEventListener("click",()=>{
             	document.getElementById("html_code").value+=">";
-            })
+            }
+            */
+            function clearcode(id) {
+                document.getElementById(id).value = "";
+            }
         </script>
     </body>
 </html>

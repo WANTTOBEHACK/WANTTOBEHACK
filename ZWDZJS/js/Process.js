@@ -1,0 +1,1 @@
+(function(){console.log("无广告, 个人学习, 请勿商用")})();

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<title>游戏主页</title>
+		<style type="text/css" media="all">
+			.box{
+				width: 100%;
+				height: 610px;
+				background-color: rgba(2,2,2,1);
+				
+			}
+			.v1{
+				width: 100%;
+				height: 10%;
+				background-color: #595959;
+			} 
+			a{
+				text-decoration: none;
+				color: white;
+				display: inline-block;
+				height: 100%;
+				text-align: center;
+				background-color: #8f8f8f;
+				color: white;
+				line-height: 65px;
+				width: 100px;
+			
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box">
+			<div class="v1">
+				<a onclick="by()" href="#">捕鱼达人</a>
+				<a onclick="xs()" href="#">像素小鸟</a>
+				<a href="#" onclick="kxxxl()" >开心消消乐</a>
+			</div>
+			<iframe id="screen" width="100%" height="100%" src="" frameborder="0"></iframe>
+		</div>
+		<script type="text/javascript" charset="utf-8">
+		      let a = document.getElementById("screen")
+		      function by(){
+		      	a.src = "/捕鱼达人/index.html"
+		      }
+		      
+		      function xs(){
+		      a.src = "像素小鸟/index.html"
+		      }
+		      
+		      function kxxxl(){
+		      	a.src = "/开心消消乐/index.html"
+		      }
+		     
+		</script>
+	</body>
+</html>
